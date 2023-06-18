@@ -1,0 +1,310 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-image: linear-gradient(black, lightpink);
+}
+/* header */
+#header {
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    background-image: linear-gradient(lightblue, lightgreen);
+    font-weight: bold;
+    box-shadow: inset 2px 2px 5px black;
+    height: 50px;
+    line-height: 50px;
+    color: #4540E6;
+    text-shadow: 2px 2px 5px white;
+    font-family: 'Tilt Prism', cursive;
+}
+#main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+/* game board */
+#game-board {
+    display: flex;
+    width: 400px;
+    height: 400px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+    position: relative;
+    opacity: 0.2;
+  }
+  /* squares that will be clicked */
+  .square {
+    width: 33.33%; /* 1/3 of the container width */
+    height: 33.33%; /* 1/3 of the container height */
+    border: 5px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    cursor: pointer;
+  }
+  /* media queries for game board and squares */
+  @media screen and (max-width: 420px) {
+    #game-board {
+      width: 300px;
+      height: 300px;
+    }
+    
+    .square {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  @media screen and (max-width: 315px) {
+    #game-board {
+      width: 240px;
+      height: 240px; /* Adjusted height to maintain the square shape */
+    }
+    
+    .square {
+      width: 80px;
+      height: 80px;
+    }
+
+    #game-board .cross {
+        width: 60px; /* Adjusted size for smaller screens */
+        height: 60px; /* Adjusted size for smaller screens */
+      }
+    
+      #game-board .cross::before {
+        left: 30%; /* Adjusted position for smaller screens */
+        width: 40%; /* Adjusted width for smaller screens */
+        height: 100%;
+      }
+    
+      #game-board .cross::after {
+        top: 30%; /* Adjusted position for smaller screens */
+        width: 100%;
+        height: 40%; /* Adjusted height for smaller screens */
+      }
+    
+      #game-board .circle {
+        height: 50px; /* Adjusted size for smaller screens */
+        width: 50px; /* Adjusted size for smaller screens */
+      }
+  }
+  /* pop up button when the game is opened for the first time */
+#start-container {
+    position: absolute;
+    margin-top: -60px;
+    background-image: linear-gradient(lightsalmon, lightskyblue);
+    width: 200px;
+    height: 200px;
+    border: 3px dotted red;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: come 3s ease;
+}
+@keyframes come {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+#start-container.active {
+    animation: go-away 1s linear;
+}
+#start {
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 2px solid lightslategray;
+    background-color: #6CF5B5;
+    transition: .5s;
+    cursor: pointer;
+    font-size: 19px;
+    font-family: 'Dancing Script', cursive;
+}
+#start:hover {
+    background-color: aqua;
+}
+@keyframes go-away {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+/* pop up button for choosing to play either with another player or computer (AI) */
+#mode-container {
+    margin-top: -60px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(lightskyblue, lightseagreen);
+    width: 200px;
+    height: 200px;
+    border-radius: 25px;
+    animation: playmode 3s ease;
+    display: none;
+    border: 2px dotted lightgoldenrodyellow;
+}
+@keyframes playmode {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+#mode-container.active {
+    animation: playmode-go 2s ease;
+}
+@keyframes playmode-go {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+h3, #plavspla-mode, #plavsai-mode {
+    margin: 10px;
+}
+#plavspla-mode, #plavsai-mode {
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px white;
+}
+#plavspla-mode {
+    border: 2px solid green;
+    background-color: lawngreen;
+    font-family: 'Kalam', cursive;
+}
+#plavspla-mode:hover {
+    background-color: #14F511;
+}
+#plavsai-mode {
+    border: 2px solid red;
+    background-color: lightcoral;
+    font-family: 'Kalam', cursive;
+}
+#plavsai-mode:hover {
+    background-color: #FF8F9A;
+}
+/* pop up button to restart the game after the winner is declared or draw */
+#restart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: brown;
+    border: 3px solid #6CF5B5;
+    width: 170px;
+    height: 180px;
+    margin-top: -80px;
+    position: absolute;
+    border-radius: 25px;
+    display: none;
+}
+#restart-container.active {
+    animation: come-out 1s ease;
+}
+@keyframes come-out {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+#restart {
+    padding: 10px 20px;
+    border: 2px solid yellow;
+    background-color: lightseagreen;
+    color: lightsalmon;
+    text-shadow: 2px 2px 5px black;
+    font-weight: bold;
+    border-radius: 25px;
+    font-size: 18px;
+    transition: .5s;
+    cursor: pointer;
+}
+#restart:hover {
+    background-color: #6CF5B5;
+}
+.winning-square {
+    background-color: aquamarine;
+    opacity: 0.6;
+  }
+.winning-square1 {
+    background-color: #87ADF5;
+    opacity: 0.6;
+  }
+
+.square:nth-child(3) {
+    border-right: none;
+}
+.square:nth-child(6) {
+    border-right: none;
+}
+.square:nth-child(7) {
+    border-bottom: none;
+}
+.square:nth-child(8) {
+    border-bottom: none;
+}
+.square:nth-child(9) {
+    border-right: none;
+    border-bottom: none;
+}
+.cross {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    transform: rotate(45deg);
+}
+.cross::before, .cross::after {
+    content: "";
+    position: absolute;
+    background-color: red;
+    box-shadow: inset 2px 2px 15px orange;
+}
+.cross:before {
+    left: 35%;
+    width: 30%;
+    height: 100%;
+}
+.cross:after {
+    top: 35%;
+    width: 100%;
+    height: 30%;
+}
+.circle {
+    height: 90px;
+    width: 90px;
+    border: 15px solid bisque;
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 15px green;
+}
+/* container to show the results after every move */
+#result-show {
+    font-size: 25px;
+    font-weight: bold;
+    color: brown;
+    text-shadow: 2px 2px 5px orange;
+    font-family: 'El Messiri', sans-serif;
+}
+
