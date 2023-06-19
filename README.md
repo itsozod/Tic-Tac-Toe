@@ -1,5 +1,5 @@
 # Tic-Tac-Toe
-<h1>Skills learned:</h1>
+<h3>Skills learned:</h3>
 <ul>
 <li>Factorial functions</li>
 <li>Pop up and fading animations</li>
